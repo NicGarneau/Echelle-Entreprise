@@ -100,7 +100,7 @@
         "retentionInDays": {
             "type": "string",
             "defaultValue": ""
-        },        
+        },
         "enableAsc": {
             "type": "string",
             "defaultValue": "No",
@@ -248,7 +248,7 @@
             "metadata": {
                 "description": "If 'Yes' is selected, policy will be assigned to enforce VMSS monitoring."
             }
-        }, 
+        },
         "enableSecuritySolution": {
             "type": "string",
             "defaultValue": "No",
@@ -320,7 +320,7 @@
                 "No"
             ],
             "defaultValue": "Yes"
-        },               
+        },
         "enableSqlAudit": {
             "type": "string",
             "defaultValue": "No",
@@ -440,8 +440,16 @@
         "firewallZones": {
             "type": "array",
             "defaultValue": []
+        },
+        "Policy_Allowed-Locations": {
+            "type": "array",
+            "metadata": {
+                "displayName": "Which Azure Regions will you allow resources to be built in?",
+                "description": "Policy_Allowed-Locations",
+                "strongType": "location"
+            },
+            "defaultValue": []
         }
-
     },
     "variables": {
         "azPolicyEnvMapping": {

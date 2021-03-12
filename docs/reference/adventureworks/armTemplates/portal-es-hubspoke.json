@@ -1414,6 +1414,50 @@
                         "visible": true
                     }
                 ]
+            },
+            {
+                "name": "locationsSettings",
+                "label": "Liste des régions permises",
+                "subLabel": {
+                    "preValidation": "Permet de sélectionner la liste des régions permises.",
+                    "postValidation": "Fait"
+                },
+                "bladeTitle": "Régions permises",
+                "elements": [
+                    {
+                        "name": "info",
+                        "type": "Microsoft.Common.InfoBox",
+                        "visible": true,
+                        "options": {
+                            "icon": "Info",
+                            "text": "Ici, on veut essayer d'offrir une liste de régions permises pour les groupes de ressources."
+                        }
+                    },
+                    {
+                        "name": "esLocationsApi",
+                        "type": "Microsoft.Solutions.ArmApiControl",
+                        "request": {
+                            "method": "GET",
+                            "path": "locations?api-version=2019-11-01"
+                        }
+                    },
+                    {
+                        "name": "esLocations",
+                        "type": "Microsoft.Common.DropDown",
+                        "label": "Liste des régions",
+                        "multiselect": false,
+                        "selectAll": true,
+                        "filter": true,
+                        "filterPlaceholder": "Filter items ...",
+                        "multiLine": true,
+                        "toolTip": "Sélectioner les régions permises.",
+                        "defaultValue": "",
+                        "constraints": {
+                            "allowedValues": "[map(steps('locationsSettings').esLocationsApi.value, (item) => parse(concat('{\"label\":\"', item.displayName, '\",\"value\":\"', item.name, '\"}')))]",
+                            "required": true
+                        }
+                    }
+                ]
             }
         ],
         "outputs": {
@@ -1473,7 +1517,8 @@
             "enableArcMonitoring": "[steps('lzGoalState').esArcVmMonitoring]",
             "vpnOrErZones": "[steps('esConnectivityGoalState').esGwOrErAz]",
             "firewallZones": "[steps('esConnectivityGoalState').esGwOrErAz]",
-            "corpConnectedLzSubscriptionId": "[if(or(not(contains(steps('lzGoalState').esCorpLzSub, steps('esGoalState').esMgmtSub)), not(contains(steps('lzGoalState').esCorpLzSub, steps('esConnectivityGoalState').esConnectivitySub))), steps('lzGoalState').lzConnectedSubs, '')]"
+            "corpConnectedLzSubscriptionId": "[if(or(not(contains(steps('lzGoalState').esCorpLzSub, steps('esGoalState').esMgmtSub)), not(contains(steps('lzGoalState').esCorpLzSub, steps('esConnectivityGoalState').esConnectivitySub))), steps('lzGoalState').lzConnectedSubs, '')]",
+            "Policy_Allowed-Locations": "[steps('locationsSettings').esLocations]"
         }
     }
 }

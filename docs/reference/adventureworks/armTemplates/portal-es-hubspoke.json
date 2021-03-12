@@ -1417,7 +1417,7 @@
             },
             {
                 "name": "locationsSettings",
-                "label": "Liste des régions permises",
+                "label": "Régions permises",
                 "subLabel": {
                     "preValidation": "Permet de sélectionner la liste des régions permises.",
                     "postValidation": "Fait"
@@ -1430,7 +1430,7 @@
                         "visible": true,
                         "options": {
                             "icon": "Info",
-                            "text": "Ici, on veut essayer d'offrir une liste de régions permises pour les groupes de ressources."
+                            "text": "Les régions sélectionnées seront les seules régions permises pour les groupes de ressources et leurs ressources."
                         }
                     },
                     {
@@ -1445,10 +1445,10 @@
                         "name": "esLocations",
                         "type": "Microsoft.Common.DropDown",
                         "label": "Liste des régions",
-                        "multiselect": false,
+                        "multiselect": true,
                         "selectAll": true,
                         "filter": true,
-                        "filterPlaceholder": "Filter items ...",
+                        "filterPlaceholder": "Filtrer les régions...",
                         "multiLine": true,
                         "toolTip": "Sélectioner les régions permises.",
                         "defaultValue": "",

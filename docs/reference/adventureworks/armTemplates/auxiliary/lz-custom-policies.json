@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "topLevelManagementGroupPrefix": {
+            "type": "string",
+            "maxLength": 10,
+            "metadata": {
+                "description": "Provide a prefix (max 10 characters, unique at tenant-scope) for the Management Group hierarchy and other resources created as part of Enterprise-scale."
+            }
+        },
+        "allowedLocations": {
+            "type": "array",
+            "defaultvalue": [],
+            "metadata": {
+                "description": "Provide an array of locations that will be used for allowed locations policy"
+            }
+        }
+    },
+    "variables": {
+        "scope": "[concat('/providers/Microsoft.Management/managementGroups/', parameters('topLevelManagementGroupPrefix'), '-landingzones')]",
+        "policyDefinitions": {
+            "allowedLocationsForResourceGroup": "/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988"
+        },
+        "policyAssignmentNames": {
+            "allowedLocationsForResourceGroup": "Allowed-locations-for-resource-group"
+        }
+    },
+    "resources": [
+        {
+            "condition": "[not(empty(parameters('allowedLocations')))]",
+            "type": "Microsoft.Authorization/policyAssignments",
+            "apiVersion": "2018-05-01",
+            "name": "[variables('policyAssignmentNames').allowedLocationsForResourceGroup]",
+            "location": "[deployment().location]",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "description": "Allowed-locations-for-resource-group-description",
+                "displayName": "Allowed-locations-for-resource-group-display-name",
+                "policyDefinitionId": "[variables('policyDefinitions').allowedLocationsForResourceGroup]",
+                "scope": "[variables('scope')]",
+                "parameters": {
+                    "listOfAllowedLocations": {
+                        "value": "[parameters('allowedLocations')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}

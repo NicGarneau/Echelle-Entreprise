@@ -12,82 +12,9 @@
 		},
         "basics": [
             {
-				"name": "hostpoolName",
-				"type": "Microsoft.Common.TextBox",
-				"label": "Host pool name",
-				"toolTip": "Windows Virtual Desktop Host pools are a collection of one or more identical virtual machines within Windows Virtual Desktop tenant environments.",
-				"constraints": {
-					"required": true,
-					"regex": "^[\\w-'][\\w-'\\s]*[\\w-']+$",
-					"validationMessage": "The name for the Windows Virtual Desktop host pool may contain only alphanumeric characters, spaces, underscore, apostrophe, or dash characters. Leading or trailing whitespace is not allowed."
-				},
-				"visible": true
-			},
-			{
-				"name": "isPersonalDesktop",
-				"type": "Microsoft.Common.OptionsGroup",
-				"label": "Desktop type",
-				"toolTip": "Select 'Pooled' if you would like users to be directed to the best available session host in the pool and to utilize multi-session virtual machines. Select 'Personal' if you would like each user to have their own virtual machine.",
-				"defaultValue": "Pooled",
-				"constraints": {
-					"allowedValues": [
-						{
-							"label": "Pooled",
-							"value": {
-								"value": false,
-								"personalMultiplier": 0
-							}
-						},
-						{
-							"label": "Personal",
-							"value": {
-								"value": true,
-								"personalMultiplier": 1
-							}
-						}
-					]
-				}
-			},
-			{
-				"name": "defaultDesktopUsers",
-				"type": "Microsoft.Common.TextBox",
-				"label": "Default desktop users",
-				"toolTip": "Enter a comma separated list of users to be automatically assigned to the desktop app group for the host pool. For example, 'user1@contoso.com,user2@contoso.com,etc.'.",
-				"defaultValue": "",
-				"constraints": {
-					"required": false,
-					"regex": "^([a-zA-Z0-9_.+-]+@([a-zA-Z0-9-]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,})(,[a-zA-Z0-9_.+-]+@([a-zA-Z0-9-]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,})*$",
-					"validationMessage": "The list may only contain UPNs (in the form of valid email addresses) separated by commas. Leading whitespace, trailing whitespace, or additional spaces before or after commas is not allowed."
-				},
-				"visible": true
-			},
-			{
-				"name": "serviceMetadataLocationTextBlock",
-				"type": "Microsoft.Common.TextBlock",
-				"options": {
-					"text": "Windows Virtual Desktop stores information that is global in nature. Select the location you would like the service metadata to be stored.",
-					"link": {
-						"label": "Learn more",
-						"uri": "https://aka.ms/wvdgeo"
-					}
-				}
-			},
-			{
-				"name": "serviceMetadataLocation",
-				"type": "Microsoft.Common.DropDown",
-				"label": "Service metadata location",
-				"toolTip": "Windows Virtual Desktop is currently available for all geographical locations. Initially, service metadata can only be stored in the United States (US) geography.",
-				"defaultValue": "United States",
-				"constraints": {
-					"allowedValues": [
-						{
-							"label": "United States",
-							"value": "United-States"
-						}
-					]
-				},
-				"visible": true
-			}
+	    
+	    }
+			 
       
         ],
         "steps": [

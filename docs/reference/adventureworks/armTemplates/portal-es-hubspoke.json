@@ -11,7 +11,7 @@
 			}
 		},
         "basics": [
-            {"visible": true}
+            {"visible": false}
         ],
         "steps": [
 		
